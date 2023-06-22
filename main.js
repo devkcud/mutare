@@ -20,6 +20,10 @@ function toggle(open) {
     editor.selectionEnd = end + open.length;
 }
 
+function changewrap() {
+    editor.style.textWrap = (editor.style.textWrap === "nowrap" ? "wrap" : "nowrap");
+}
+
 editor.addEventListener('keyup', (e) => {
     preview.innerHTML = converter.makeHtml(e.target.value);
     lineNumbers.innerHTML = Array(e.target.value.split('\n').length).fill('<span></span>').join('');

@@ -23,7 +23,7 @@ div#editor {
     display: inline-flex;
     flex: 1;
     width: 100%;
-    padding: 2rem;
+    padding: 3rem 2rem;
     background: #ffffff;
 }
 
@@ -46,19 +46,49 @@ div#preview-section {
     color: #3d3d3d;
 }
 
-#line-numbers {
-  width: 20px;
-  text-align: right;
-  margin-right: 1rem;
+div#line-numbers {
+    width: 20px;
+    text-align: right;
+    margin-right: 1rem;
 }
 
-#line-numbers span {
-  counter-increment: linenumber;
+div#line-numbers span {
+    counter-increment: linenumber;
 }
 
-#line-numbers span::before {
-  content: counter(linenumber);
-  display: block;
-  color: #506882;
-  font-size: 18px;
+div#line-numbers span::before {
+    content: counter(linenumber);
+    display: block;
+    color: #506882;
+    font-size: 18px;
+}
+
+div#navbar {
+    position: absolute;
+    color: #506882;
+
+    padding: 0.5rem;
+}
+
+div#navbar > ul {
+    display: flex;
+
+    list-style: none;
+
+    gap: 1rem;
+}
+
+div#navbar > ul > li {
+    user-select: none;
+}
+
+div#navbar > ul > li:hover {
+    cursor: pointer;
+}
+
+div#navbar > ul > li.sep {
+    width: 1px;
+    height: 16px;
+
+    background: #506882;
 }
