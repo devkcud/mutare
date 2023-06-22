@@ -1,8 +1,35 @@
+:root {
+    --background: #ffffff;
+    --background-dim: #f3f3f3;
+    --font-color: #000000;
+    --font-color-dim: #3d3d3d;
+    --accent-color: #506882;
+}
+
+body.darkmode {
+    --background: #181a1b;
+    --background-dim: #1f2123;
+    --font-color: #ffffff;
+    --font-color-dim: #c0b6a5;
+}
+
 * {
     margin: 0;
     padding: 0;
 
     font-family: 'Poppins', sans-serif;
+}
+
+svg#darktoggler {
+    position: absolute;
+    fill: var(--accent-color);
+
+    top: 1rem;
+    right: 1rem;
+    rotate: -45deg;
+
+    width: 30px;
+    height: 30px;
 }
 
 html,
@@ -24,7 +51,7 @@ div#editor {
     flex: 1;
     width: 100%;
     padding: 2rem;
-    background: #ffffff;
+    background: var(--background);
 }
 
 textarea#text-editor {
@@ -36,14 +63,16 @@ textarea#text-editor {
     height: 100%;
 
     font-size: 18px;
-    color: #333333;
+    color: var(--font-color);
+
+    background: none;
 }
 
 div#preview-section {
     flex: 1;
     padding: 2rem 4rem;
-    background: #f3f3f3;
-    color: #3d3d3d;
+    background: var(--background-dim);
+    color: var(--font-color-dim);
 }
 
 #line-numbers {
@@ -59,6 +88,6 @@ div#preview-section {
 #line-numbers span::before {
   content: counter(linenumber);
   display: block;
-  color: #506882;
+  color: var(--accent-color);
   font-size: 18px;
 }
