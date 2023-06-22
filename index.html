@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Mutare - Edit</title>
+
+        <link rel="stylesheet" href="style.css">
+
+        <script type="text/javascript" src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+        <script src="main.js" defer></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="editor">
+                <div id="line-numbers"><span></span></div>
+                <textarea id="text-editor" spellcheck="false" autocomplete="off" autofocus placeholder="Start typing"></textarea>
+            </div>
+            <div id="preview-section">
+                <h3 style="font-weight: 500; color: #c7c7c7; margin-bottom: 1rem; user-select: none;">preview</h3>
+                <div id="preview"></div>
+            </div>
+        </div>
+    </body>
+</html>
