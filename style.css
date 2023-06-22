@@ -4,6 +4,7 @@
     --font-color: #000000;
     --font-color-dim: #3d3d3d;
     --accent-color: #506882;
+    --red: #ff0000;
 }
 
 body.darkmode {
@@ -30,6 +31,8 @@ svg#darktoggler {
 
     width: 30px;
     height: 30px;
+
+    cursor: pointer;
 }
 
 html,
@@ -50,7 +53,7 @@ div#editor {
     display: inline-flex;
     flex: 1;
     width: 100%;
-    padding: 2rem;
+    padding: 3rem 2rem;
     background: var(--background);
 }
 
@@ -75,19 +78,110 @@ div#preview-section {
     color: var(--font-color-dim);
 }
 
-#line-numbers {
-  width: 20px;
-  text-align: right;
-  margin-right: 1rem;
+div#navbar {
+    position: absolute;
+    color: var(--accent-color);
+
+    padding: 0.5rem;
 }
 
-#line-numbers span {
-  counter-increment: linenumber;
+div#navbar > ul {
+    display: flex;
+
+    list-style: none;
+
+    gap: 1rem;
 }
 
-#line-numbers span::before {
-  content: counter(linenumber);
-  display: block;
-  color: var(--accent-color);
-  font-size: 18px;
+div#navbar > ul > li {
+    user-select: none;
+
+    position: relative;
+    display: inline-block;
+}
+
+div#navbar > ul > li::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--font-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+div#navbar > ul > li:not(:first-of-type):not(li.sep):hover::after {
+    transform: scaleX(1);
+}
+
+div#navbar > ul > li:not(:first-of-type):not(li.sep):hover {
+    cursor: pointer;
+
+    color: var(--font-color);
+}
+
+div#navbar > ul > li.sep {
+    width: 1px;
+    height: 22px;
+
+    background: var(--accent-color);
+}
+
+ul#notifications {
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    list-style: none;
+}
+
+ul#notifications > li {
+    width: 200px;
+
+    background: var(--background);
+    color: var(--font-color);
+
+    margin-bottom: 1rem;
+    padding: 1rem;
+
+    box-shadow: 0 0 4px 0 var(--font-color);
+    border-radius: 8px;
+
+    position: relative;
+}
+
+ul#notifications > li * {
+    user-select: none;
+}
+
+ul#notifications > li > span.hour {
+    position: absolute;
+
+    right: 0.5rem;
+    top: 0.5rem;
+
+    color: var(--accent-color);
+
+    font-size: 12px;
+
+    font-style: italic;
+}
+
+ul#notifications > li.urgent {
+    outline: 1px solid var(--error);
+}
+
+ul#notifications > li.urgent > h4 {
+    color: var(--error);
+}
+
+ul#notifications > li:hover {
+    outline: 1px solid var(--accent-color);
+    cursor: pointer;
 }

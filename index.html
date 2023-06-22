@@ -13,8 +13,20 @@
     </head>
     <body>
         <div id="wrapper">
+            <div id="navbar">
+                <ul>
+                    <li style="font-weight: 700;">Mutare</li>
+                    <li class="sep"></li>
+                    <li>New File</li>
+                    <li>Save File</li>
+                    <li>Open File</li>
+                    <li class="sep"></li>
+                    <li onclick="changewrap()">Toggle Wrap</li>
+                    <li onclick="clearNotifications()">Clear Notifications</li>
+                </ul>
+            </div>
+
             <div id="editor">
-                <div id="line-numbers"><span></span></div>
                 <textarea id="text-editor" spellcheck="false" autocomplete="off" autofocus placeholder="Start typing"></textarea>
             </div>
             <div id="preview-section">
@@ -23,6 +35,7 @@
             </div>
         </div>
 
+        <ul id="notifications"></ul>
         <svg id="darktoggler" height="50px" width="50px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 56 56" xml:space="preserve"><g><path d="M29,28c0-11.917,7.486-22.112,18-26.147C43.892,0.66,40.523,0,37,0C21.561,0,9,12.561,9,28 s12.561,28,28,28c3.523,0,6.892-0.66,10-1.853C36.486,50.112,29,39.917,29,28z"></path></g></svg>
     </body>
 </html>
