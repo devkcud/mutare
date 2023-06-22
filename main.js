@@ -3,7 +3,6 @@
 
 const editor = document.getElementById('text-editor');
 const preview = document.getElementById('preview');
-const lineNumbers = document.getElementById('line-numbers');
 
 const converter = new showdown.Converter();
 preview.innerHTML = converter.makeHtml(editor.value);
@@ -26,7 +25,6 @@ function changewrap() {
 
 editor.addEventListener('keyup', (e) => {
     preview.innerHTML = converter.makeHtml(e.target.value);
-    lineNumbers.innerHTML = Array(e.target.value.split('\n').length).fill('<span></span>').join('');
 });
 
 window.addEventListener('keydown', (e) => {

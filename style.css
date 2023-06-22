@@ -46,23 +46,6 @@ div#preview-section {
     color: #3d3d3d;
 }
 
-div#line-numbers {
-    width: 20px;
-    text-align: right;
-    margin-right: 1rem;
-}
-
-div#line-numbers span {
-    counter-increment: linenumber;
-}
-
-div#line-numbers span::before {
-    content: counter(linenumber);
-    display: block;
-    color: #506882;
-    font-size: 18px;
-}
-
 div#navbar {
     position: absolute;
     color: #506882;
