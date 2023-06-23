@@ -1,15 +1,3 @@
-// TODO: MenuBar: Save/Open/New file
-// TODO: HelperMenu: Bold/Italic/List
-
-const editor = document.getElementById('text-editor');
-const preview = document.getElementById('preview');
-const notifications = document.getElementById('notifications');
-
-const converter = new showdown.Converter();
-preview.innerHTML = converter.makeHtml(editor.value);
-
-editor.focus();
-
 function getTime() {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
@@ -81,38 +69,40 @@ function changewrap() {
     notify('Wrap', 'Text wrapping ' + (editor.style.textWrap === 'nowrap' ? 'disabled' : 'enabled'))
 }
 
-editor.addEventListener('keyup', (e) => {
-    preview.innerHTML = converter.makeHtml(e.target.value);
-});
+function savefile() {
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(editor.value));
+    element.setAttribute('download', 'text.md');
 
-window.addEventListener('keydown', (e) => {
-    if (e.ctrlKey) {
-        switch (e.key) {
-            case 'i': {
-                e.preventDefault();
-                toggle('_');
-                break;
-            };
+    element.style.display = 'none';
 
-            case 's': {
-                e.preventDefault();
-                break;
-            }
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
 
-            case 'b': {
-                e.preventDefault();
-                toggle('**');
-                break;
-            };
+function openfile() {
+    const hidden = document.createElement('input');
+    hidden.type = 'file';
+    hidden.style.display = 'none';
 
-            case 'o': {
-                e.preventDefault();
-                break;
-            };
+    document.body.appendChild(hidden);
+    hidden.click();
 
-            default: break;
-        }
-    }
-});
+    hidden.addEventListener('change', (e) => {
+        const file = e.target.files[0];
 
-document.getElementById('darktoggler').addEventListener('click', () => document.body.classList.toggle('darkmode'));
+        new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload  = (e) => resolve(e.target.result);
+            reader.onerror = (e) => reject(e.target.error);
+
+            reader.readAsText(file);
+        })
+            .then((content) => (editor.value = content))
+            .catch((error) => console.error('Error:', error));
+    });
+
+    document.body.removeChild(hidden);
+}
