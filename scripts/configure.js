@@ -62,4 +62,7 @@ window.addEventListener('keydown', (e) => {
         }
 });
 
-document.getElementById('darktoggler').addEventListener('click', () => document.body.classList.toggle('darkmode'));
+document.getElementById('darktoggler').addEventListener('click', () => {
+    document.body.classList.toggle('darkmode');
+    nots.send('Dark Mode', `<i>${document.body.classList.contains('darkmode') ? 'Enabled' : 'Disabled'}</i> dark mode`, false);
+});
