@@ -14,7 +14,7 @@ editor.addEventListener('keyup', (e) => {
 });
 
 window.addEventListener('keydown', (e) => {
-    if (e.ctrlKey)
+    if (e.ctrlKey) {
         switch (e.key) {
             case 'i': {
                 e.preventDefault();
@@ -28,17 +28,23 @@ window.addEventListener('keydown', (e) => {
                 break;
             };
 
-            case 'h': {
-                e.preventDefault();
-                addTextStart('#', '');
-                break;
-            };
-
             case 'Enter': {
                 e.preventDefault();
                 addText('<br>', '');
                 break;
             };
+
+            case 'h': {
+                e.preventDefault();
+                addTextStart('#');
+                break;
+            }
+
+            case 'H': {
+                e.preventDefault();
+                remTextStart('#');
+                break;
+            }
 
             case 's': {
                 e.preventDefault();
@@ -60,6 +66,7 @@ window.addEventListener('keydown', (e) => {
 
             default: break;
         }
+    }
 });
 
 document.getElementById('darktoggler').addEventListener('click', () => {
