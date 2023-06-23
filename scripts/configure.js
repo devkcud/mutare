@@ -1,9 +1,8 @@
-// TODO: MenuBar: Save/Open/New file
 // TODO: HelperMenu: Bold/Italic/List
 
+const nots = new Notes();
 const editor = document.getElementById('text-editor');
 const preview = document.getElementById('preview');
-const notifications = document.getElementById('notifications');
 
 const converter = new showdown.Converter();
 preview.innerHTML = converter.makeHtml(editor.value);
