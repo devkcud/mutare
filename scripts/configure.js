@@ -15,33 +15,52 @@ editor.addEventListener('keyup', (e) => {
 });
 
 window.addEventListener('keydown', (e) => {
-    if (e.ctrlKey) {
+    if (e.ctrlKey)
         switch (e.key) {
             case 'i': {
                 e.preventDefault();
-                toggle('_');
+                addText('_');
+                break;
+            };
+
+            case 'b': {
+                e.preventDefault();
+                addText('**');
+                break;
+            };
+
+            case 'h': {
+                e.preventDefault();
+                addTextStart('#', '');
+                break;
+            };
+
+            case 'Enter': {
+                e.preventDefault();
+                addText('<br>', '');
                 break;
             };
 
             case 's': {
                 e.preventDefault();
+                savefile();
                 break;
             }
 
-            case 'b': {
+            case 'o': {
                 e.preventDefault();
-                toggle('**');
+                openfile();
                 break;
             };
 
-            case 'o': {
+            case 'd': {
                 e.preventDefault();
+                newfile();
                 break;
             };
 
             default: break;
         }
-    }
 });
 
 document.getElementById('darktoggler').addEventListener('click', () => document.body.classList.toggle('darkmode'));
