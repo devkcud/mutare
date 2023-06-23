@@ -20,11 +20,13 @@ function openfile() {
             reader.onload = (e) => resolve(e.target.result);
             reader.onerror = (e) => reject(e.target.error);
 
-            nots.send('File', `Opened <b>${file.name}</b>`, false);
-
             reader.readAsText(file);
         })
-            .then((content) => editor.value = content)
+            .then((content) => {
+                editor.value = content;
+                preview.innerHTML = converter.makeHtml(content);
+                nots.send('File', `Opened <b>${file.name}</b>`, false);
+            })
             .catch((error) => nots.send('Error', error, true));
     });
 
