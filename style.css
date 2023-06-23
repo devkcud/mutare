@@ -2,7 +2,7 @@
     --background: #ffffff;
     --background-dim: #f3f3f3;
     --font-color: #000000;
-    --font-color-dim: #3d3d3d;
+    --font-color-dim: #c7c7c7;
     --accent-color: #506882;
     --red: #ff0000;
 }
@@ -11,7 +11,8 @@ body.darkmode {
     --background: #181a1b;
     --background-dim: #1f2123;
     --font-color: #ffffff;
-    --font-color-dim: #c0b6a5;
+    --font-color-dim: #31333b;
+    --accent-color: #578899;
 }
 
 * {
@@ -75,6 +76,10 @@ div#preview-section {
     flex: 1;
     padding: 2rem 4rem;
     background: var(--background-dim);
+    color: var(--font-color);
+}
+
+div#preview-section h3 {
     color: var(--font-color-dim);
 }
 
@@ -106,11 +111,11 @@ div#navbar > ul > li::after {
     left: 0;
     bottom: -1px;
     width: 100%;
-    height: 2px;
+    height: 1px;
     background-color: var(--font-color);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.15s ease-in-out;
 }
 
 div#navbar > ul > li:not(:first-of-type):not(li.sep):hover::after {
