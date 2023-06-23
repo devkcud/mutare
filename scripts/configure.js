@@ -18,13 +18,13 @@ window.addEventListener('keydown', (e) => {
         switch (e.key) {
             case 'i': {
                 e.preventDefault();
-                addText('_');
+                toggleText('_');
                 break;
             };
 
             case 'b': {
                 e.preventDefault();
-                addText('**');
+                toggleText('**');
                 break;
             };
 
