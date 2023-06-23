@@ -6,10 +6,11 @@
 
         <title>Mutare - Edit</title>
 
-        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="style.css">
 
         <script type="text/javascript" src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
-        <script src="./main.js" defer></script>
+        <script src="scripts/main.js" defer></script>
+        <script src="scripts/fileman.js" defer></script>
     </head>
     <body>
         <div id="wrapper">
@@ -17,9 +18,9 @@
                 <ul>
                     <li style="font-weight: 700;">Mutare</li>
                     <li class="sep"></li>
-                    <li>New File</li>
-                    <li>Save File</li>
-                    <li>Open File</li>
+                    <li id="newfile">New File</li>
+                    <li id="savefile">Save File</li>
+                    <li id="openfile">Open File</li>
                     <li class="sep"></li>
                     <li onclick="changewrap()">Toggle Wrap</li>
                     <li onclick="clearNotifications()">Clear Notifications</li>
