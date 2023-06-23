@@ -46,6 +46,12 @@ function savefile() {
 }
 
 function toggleWrap() {
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)
+        return nots.send('Firefox', 'This feature is disabled for Firefox :(', true);
+
+    // NOTE: Can't do a text wrap for firefox tried for about 2h and nothing came out. Disabling
+    // TODO: Find a solution
+
     editor.style.textWrap = (editor.style.textWrap === 'nowrap' ? 'wrap' : 'nowrap');
     nots.send('Wrap', 'Text wrapping ' + (editor.style.textWrap === 'nowrap' ? 'disabled' : 'enabled'))
 }

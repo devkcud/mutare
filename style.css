@@ -15,7 +15,7 @@ body {
     --font-color: #000000;
     --font-color-dim: #c7c7c7;
     --accent-color: #506882;
-    --red: #ff0000;
+    --error: #ff0000;
 }
 
 body.darkmode {
