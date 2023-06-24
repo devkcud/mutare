@@ -79,6 +79,31 @@ ul#navbar li:not(:first-of-type):not(li.sep):hover::after {
     transform: scaleX(1);
 }
 
+ul#navbar li span {
+    display: none;
+
+    width: 200%;
+
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+
+    color: var(--font-color);
+
+    font-size: 12px;
+
+    font-weight: 200;
+}
+
+ul#navbar li:hover span {
+    display: block;
+    opacity: 1;
+}
+
 ul#navbar li.sep {
     width: 1px;
     height: 22px;
