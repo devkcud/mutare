@@ -1,5 +1,8 @@
+if (localStorage.getItem('darkmode') === 'true') document.body.classList.add('darkmode');
+
 const nots = new Notes();
 const text = new Text();
+
 const editor = document.getElementById('text-editor');
 const preview = document.getElementById('preview');
 const helpermenu = document.getElementById('helpermenu');
@@ -90,6 +93,7 @@ window.addEventListener('keydown', (e) => {
 document.getElementById('darktoggler').addEventListener('click', () => {
     document.body.classList.toggle('darkmode');
     nots.send('Dark Mode', `<i>${document.body.classList.contains('darkmode') ? 'Enabled' : 'Disabled'}</i> dark mode`, false);
+    localStorage.setItem('darkmode', document.body.classList.contains('darkmode'));
 });
 
 document.getElementById('header').onclick = (e) => {
