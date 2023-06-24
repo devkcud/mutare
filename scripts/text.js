@@ -1,99 +1,80 @@
-function addText(open, close = open) {
-    const start = editor.selectionStart;
-    const end = editor.selectionEnd;
+class Text {
+    _pos = { start: 0, end: 0 };
+    _lines = ['']
+    _selected = { line: 0, text: '' };
 
-    editor.value = editor.value.substring(0, start) + open + editor.value.substring(start, end) + close + editor.value.substring(end);
-
-    editor.selectionEnd = end + open.length;
-}
-
-function toggleText(open, close = open) {
-    const start = editor.selectionStart;
-    const end = editor.selectionEnd;
-
-    const text = editor.value;
-    const selectedText = text.substring(start, end);
-
-    let newText, newStart, newEnd;
-
-    if (start === end) {
-        addText(open, close);
-        return;
+    _reconfig() {
+        this._pos = { start: editor.selectionStart, end: editor.selectionEnd };
+        this._lines = editor.value.split('\n');
+        this._selected = {
+            line: editor.value.substring(0, this._pos.start).split('\n').length - 1,
+            text: editor.value.substring(this._pos.start, this._pos.end),
+        };
     }
 
-    if (selectedText.startsWith(open) && selectedText.endsWith(close)) {
-        newText = text.substring(0, start) + selectedText.substring(open.length, selectedText.length - close.length) + text.substring(end);
-        newStart = start;
-        newEnd = end - open.length - close.length;
-    } else {
-        newText = text.substring(0, start) + open + selectedText + close + text.substring(end);
-        newStart = start;
-        newEnd = end + open.length + close.length;
+    _finish({ start = undefined, end = start, content = undefined }) {
+        this.set(content ?? editor.value);
+        editor.focus();
+        editor.setSelectionRange(start ?? this._pos.start, end ?? this._pos.end);
     }
 
-    editor.value = newText;
-    editor.setSelectionRange(newStart, newEnd);
-}
-
-function addTextStart(open) {
-    const lines = editor.value.split('\n');
-    const start = editor.selectionStart;
-    const selectedLineIndex = editor.value.substring(0, start).split('\n').length - 1;
-
-    if (selectedLineIndex >= 0 && selectedLineIndex < lines.length) {
-        const selectedLine = lines[selectedLineIndex];
-
-        const hashedLine = open + (selectedLine.startsWith(open) ? '' : ' ') + selectedLine.trim();
-        lines[selectedLineIndex] = hashedLine;
-
-        editor.value = lines.join('\n');
-
-        const cursorPosition = editor.value.substring(0, start).length + 2;
-        editor.setSelectionRange(cursorPosition, cursorPosition);
+    set(text) {
+        editor.value = text;
+        preview.innerHTML = converter.makeHtml(text);
     }
-}
 
-function toggleTextStart(open) {
-    const lines = editor.value.split('\n');
-    const start = editor.selectionStart;
-    const selectedLineIndex = editor.value.substring(0, start).split('\n').length - 1;
+    add(open, close = open) {
+        this._reconfig();
 
-    if (selectedLineIndex >= 0 && selectedLineIndex < lines.length) {
-        const selectedLine = lines[selectedLineIndex].trim();
+        if (!this._selected.text.startsWith(open) && !this._selected.text.endsWith(close))
+            this._finish({
+                end: this._pos.end + open.length + close.length,
+                content: editor.value.substring(0, this._pos.start) + open + this._selected.text + close + editor.value.substring(this._pos.end),
+            });
+    }
 
-        let hashedLine;
+    rem(open, close = open) {
+        this._reconfig();
 
-        if (!selectedLine.startsWith(open)) {
-            hashedLine = open + (selectedLine.startsWith(open) ? '' : ' ') + selectedLine;
-            lines[selectedLineIndex] = hashedLine;
-        } else {
-            hashedLine = selectedLine.slice(open.length, selectedLine.length).trim();
-            lines[selectedLineIndex] = hashedLine;
+        if (this._selected.text.startsWith(open) && this._selected.text.endsWith(close))
+            this._finish({
+                end: this._pos.end - open.length - close.length,
+                content: editor.value.substring(0, this._pos.start) + this._selected.text.substring(open.length, this._selected.text.length - close.length) + editor.value.substring(this._pos.end),
+            });
+    }
+
+    toggle(open, close = open) {
+        this._reconfig();
+
+        if (this._selected.text.startsWith(open) && this._selected.text.endsWith(close)) this.rem(open, close);
+        else this.add(open, close);
+    }
+
+    addStart(text) {
+        this._reconfig();
+
+        const hashedLine = text + (this._lines[this._selected.line].startsWith(text) ? '' : ' ') + this._lines[this._selected.line].trim();
+        this._lines[this._selected.line] = hashedLine;
+
+        this._finish({ content: this._lines.join('\n') });
+    }
+
+    remStart(text) {
+        this._reconfig();
+
+        if (this._lines[this._selected.line].startsWith(text)) {
+            const hashedLine = this._lines[this._selected.line].slice(text.length, this._lines[this._selected.line].length).trim();
+            this._lines[this._selected.line] = hashedLine;
         }
 
-        editor.value = lines.join('\n');
-
-        const cursorPosition = editor.value.substring(0, start).length + 2;
-        editor.setSelectionRange(cursorPosition, cursorPosition);
+        // FIX: When the cursor is at the end of the line if moves to the next one
+        this._finish({ content: this._lines.join('\n') });
     }
-}
 
-function remTextStart(open) {
-    const lines = editor.value.split('\n');
-    const start = editor.selectionStart;
-    const selectedLineIndex = editor.value.substring(0, start).split('\n').length - 1;
+    toggleStart(text) {
+        this._reconfig();
 
-    if (selectedLineIndex >= 0 && selectedLineIndex < lines.length) {
-        const selectedLine = lines[selectedLineIndex].trim();
-
-        if (selectedLine.startsWith(open)) {
-            const hashedLine = selectedLine.slice(open.length, selectedLine.length).trim();
-            lines[selectedLineIndex] = hashedLine;
-        }
-
-        editor.value = lines.join('\n');
-
-        const cursorPosition = editor.value.substring(0, start).length + 2;
-        editor.setSelectionRange(cursorPosition, cursorPosition);
+        if (this._lines[this._selected.line].startsWith(text)) this.remStart(text);
+        else this.addStart(text);
     }
 }

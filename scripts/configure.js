@@ -1,6 +1,7 @@
 // TODO: HelperMenu: Bold/Italic/List
 
 const nots = new Notes();
+const text = new Text();
 const editor = document.getElementById('text-editor');
 const preview = document.getElementById('preview');
 
@@ -18,31 +19,32 @@ window.addEventListener('keydown', (e) => {
         switch (e.key) {
             case 'i': {
                 e.preventDefault();
-                toggleText('_');
+                text.toggle('_');
                 break;
             };
 
             case 'b': {
                 e.preventDefault();
-                toggleText('**');
+                text.toggle('**');
                 break;
             };
 
             case 'Enter': {
                 e.preventDefault();
-                addText('<br>', '');
+                text.add('<br>', '');
                 break;
             };
 
             case 'h': {
                 e.preventDefault();
-                addTextStart('#');
+                if (e.altKey) text.addStart('#');
+                else text.toggleStart('#');
                 break;
             }
 
             case 'H': {
                 e.preventDefault();
-                remTextStart('#');
+                text.remStart('#');
                 break;
             }
 
