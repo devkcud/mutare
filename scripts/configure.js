@@ -90,6 +90,19 @@ window.addEventListener('keydown', (e) => {
                 break;
             };
 
+            case 'k': {
+                e.preventDefault();
+                toggleWrap();
+                break;
+            }
+
+            case 'l': {
+                e.preventDefault();
+                nots.clear();
+                nots.send('Notifications', 'Cleared');
+                break;
+            }
+
             default: break;
         }
     }
