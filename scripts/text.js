@@ -16,6 +16,7 @@ class Text {
         this.set(content ?? editor.value);
         editor.focus();
         editor.setSelectionRange(start ?? this._pos.start, end ?? this._pos.end);
+        localStorage.setItem('textdoc', editor.value);
     }
 
     set(text) {

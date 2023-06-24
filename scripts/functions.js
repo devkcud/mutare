@@ -1,6 +1,7 @@
 function newfile() {
     nots.send('File', 'Opened an <i>empty file</i>', false);
     editor.value = '';
+    localStorage.removeItem('textdoc');
 }
 
 function openfile() {

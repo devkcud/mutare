@@ -4,6 +4,8 @@ const nots = new Notes();
 const text = new Text();
 
 const editor = document.getElementById('text-editor');
+if (localStorage.getItem('textdoc') !== null) editor.value = localStorage.getItem('textdoc');
+
 const preview = document.getElementById('preview');
 const helpermenu = document.getElementById('helpermenu');
 
@@ -32,6 +34,9 @@ editor.addEventListener('focus', updateCursorDiv);
 editor.addEventListener('click', updateCursorDiv);
 
 window.addEventListener('keydown', (e) => {
+    if (editor.value.trim() !== '') localStorage.setItem('textdoc', editor.value);
+    else localStorage.removeItem('textdoc');
+
     updateCursorDiv();
 
     if (e.ctrlKey) {
