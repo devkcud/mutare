@@ -175,7 +175,7 @@ svg#darktoggler {
     fill: var(--accent-color);
 
     top: 1rem;
-    right: 1rem;
+    right: 2rem;
     rotate: -45deg;
 
     width: 30px;
