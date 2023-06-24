@@ -187,3 +187,51 @@ svg#darktoggler {
     padding: 0.5rem;
     border-radius: 100%;
 }
+
+ul#helpermenu {
+    display: none;
+
+    gap: 1rem;
+
+    padding: 1rem;
+    border-radius: 4px;
+
+    list-style: none;
+
+    background: var(--background);
+    color: var(--font-color);
+
+    font-weight: 700;
+
+    box-shadow: 0 0 4px 0 var(--font-color-dim);
+    opacity: 0.3;
+
+    transition: opacity 0.15s ease-in-out;
+
+    scale: 0.7;
+}
+
+ul#helpermenu:hover {
+    opacity: 1;
+}
+
+ul#helpermenu li {
+    user-select: none;
+
+    background: var(--background-dim);
+    width: 40px;
+    padding-block: .5em;
+    text-align: center;
+
+    border-radius: 4px;
+
+    box-shadow: 0 0 4px 0 var(--font-color-dim);
+
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+ul#helpermenu li:hover {
+    cursor: pointer;
+
+    box-shadow: 0 0 4px 0 var(--accent-color);
+}
