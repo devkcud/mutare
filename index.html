@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="style.css">
 
         <script type="text/javascript" src="https://unpkg.com/showdown/dist/showdown.min.js"></script>
+        <script src="scripts/textarea-caret-position/caretposition.js"></script>
         <script src="scripts/text.js" defer></script>
         <script src="scripts/notifications.js" defer></script>
         <script src="scripts/configure.js" defer></script>
@@ -28,11 +29,43 @@
         </ul>
 
         <div id="wrapper">
-            <textarea id="text-editor" spellcheck="false" autocomplete="off" autofocus placeholder="Start typing"></textarea>
+            <textarea id="text-editor" spellcheck="false" autocomplete="off" autofocus placeholder="Start typing">
+# Hello, world!
+
+<br>
+
+## Features
+
+- Bold
+- Italic
+- Headers
+- Lists
+- Images
+- Links
+
+<br>
+
+## Testing
+
+<br>
+
+Lorem ipsum dolor ist amet.
+
+<br>
+
+![doggo](https://i.imgur.com/EBGBxZB.jpeg)
+            </textarea>
             <div id="preview"></div>
         </div>
 
         <ul id="notifications"></ul>
         <svg id="darktoggler" height="50px" width="50px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 56 56" xml:space="preserve"><g><path d="M29,28c0-11.917,7.486-22.112,18-26.147C43.892,0.66,40.523,0,37,0C21.561,0,9,12.561,9,28 s12.561,28,28,28c3.523,0,6.892-0.66,10-1.853C36.486,50.112,29,39.917,29,28z"></path></g></svg>
+
+        <ul id="helpermenu">
+            <li id="header">Hh</li>
+            <li id="bold">B</li>
+            <li id="italic">I</li>
+            <li id="break">Br</li>
+        </ul>
     </body>
 </html>

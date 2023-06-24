@@ -26,7 +26,14 @@ class Text {
     add(open, close = open) {
         this._reconfig();
 
-        if (!this._selected.text.startsWith(open) && !this._selected.text.endsWith(close))
+        if (open === '<br>')
+            return this._finish({
+                start: this._pos.end + open.length + close.length,
+                end: this._pos.end + open.length + close.length,
+                content: editor.value.substring(0, this._pos.start) + open + this._selected.text + close + editor.value.substring(this._pos.end),
+            });
+
+        if (!this._selected.text.startsWith(open) && (!this._selected.text.endsWith(close) || close === ''))
             this._finish({
                 end: this._pos.end + open.length + close.length,
                 content: editor.value.substring(0, this._pos.start) + open + this._selected.text + close + editor.value.substring(this._pos.end),
@@ -36,7 +43,7 @@ class Text {
     rem(open, close = open) {
         this._reconfig();
 
-        if (this._selected.text.startsWith(open) && this._selected.text.endsWith(close))
+        if (this._selected.text.startsWith(open) && (this._selected.text.endsWith(close) || close === ''))
             this._finish({
                 end: this._pos.end - open.length - close.length,
                 content: editor.value.substring(0, this._pos.start) + this._selected.text.substring(open.length, this._selected.text.length - close.length) + editor.value.substring(this._pos.end),
