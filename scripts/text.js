@@ -34,11 +34,22 @@ class Text {
                 content: editor.value.substring(0, this._pos.start) + open + this._selected.text + close + editor.value.substring(this._pos.end),
             });
 
-        if (!this._selected.text.startsWith(open) && (!this._selected.text.endsWith(close) || close === ''))
-            this._finish({
-                end: this._pos.end + open.length + close.length,
-                content: editor.value.substring(0, this._pos.start) + open + this._selected.text + close + editor.value.substring(this._pos.end),
-            });
+        if (!this._selected.text.startsWith(open) && (!this._selected.text.endsWith(close) || close === '')) {
+            if (this._pos.start === this._pos.end) {
+                this._finish({
+                    start: this._pos.end + open.length,
+                    end: this._pos.end + open.length,
+                    content: editor.value.substring(0, this._pos.start) + open + this._selected.text + close + editor.value.substring(this._pos.end),
+                });
+            } else {
+                console.log('got');
+                this._finish({
+                    start: this._pos.start,
+                    end: this._pos.end + open.length + close.length,
+                    content: editor.value.substring(0, this._pos.start) + open + this._selected.text + close + editor.value.substring(this._pos.end),
+                });
+}
+        }
     }
 
     rem(open, close = open) {
@@ -64,7 +75,17 @@ class Text {
         const hashedLine = text + (this._lines[this._selected.line].startsWith(text) ? '' : ' ') + this._lines[this._selected.line].trim();
         this._lines[this._selected.line] = hashedLine;
 
-        this._finish({ content: this._lines.join('\n') });
+        if (this._pos.start === this._pos.end && this._lines[this._selected.line] === text + ' ') {
+            return this._finish({
+                start: this._pos.start + text.length + 1,
+                end: this._pos.end + text.length + 1,
+                content: this._lines.join('\n'),
+            });
+        }
+
+        this._finish({
+            content: this._lines.join('\n'),
+        });
     }
 
     remStart(text) {
