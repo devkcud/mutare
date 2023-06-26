@@ -142,3 +142,5 @@ document.getElementById('break').onclick = () => {
     text.add('<br>', '');
     updateCursorDiv();
 };
+
+document.getElementById('export-html').addEventListener('click', () => savefile(true));

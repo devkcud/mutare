@@ -260,3 +260,26 @@ ul#helpermenu li:hover {
 
     box-shadow: 0 0 4px 0 var(--accent-color);
 }
+
+button#export-html {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    background: var(--background);
+    color: var(--font-color);
+
+    box-shadow: 0 0 4px 0 var(--font-color-dim);
+
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+button#export-html:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px 0 var(--accent-color);
+}

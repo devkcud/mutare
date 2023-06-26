@@ -34,17 +34,17 @@ function openfile() {
     document.body.removeChild(element);
 }
 
-function savefile() {
+function savefile(html = false) {
     element = document.createElement('a');
     element.style.display = 'none';
 
-    element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(editor.value)}`);
-    element.setAttribute('download', 'text.md');
+    element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(html ? preview.innerHTML : editor.value)}`);
+    element.setAttribute('download', html ? 'index.html' : 'text.md');
 
     document.body.appendChild(element);
     element.click();
 
-    nots.send('File', `Saved file`, false);
+    nots.send('File', html ? 'Exported file as <i>HTML</i>' : 'Saved file', false);
     document.body.removeChild(element);
 }
 
