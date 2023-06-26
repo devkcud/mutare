@@ -103,6 +103,12 @@ window.addEventListener('keydown', (e) => {
                 break;
             }
 
+            case 'e': {
+                e.preventDefault();
+                savefile(true);
+                break;
+            }
+
             default: break;
         }
     }
